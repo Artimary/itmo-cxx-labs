@@ -10,7 +10,7 @@ ShipMatrix::ShipMatrix(int rows, int cols) : rows(rows), cols(cols), shipPositio
 }
 
 // Конструктор копирования
-ShipMatrix::ShipMatrix(ShipMatrix& other) : rows(other.rows), cols(other.cols), shipPosition(other.shipPosition) {
+ShipMatrix::ShipMatrix(const ShipMatrix& other) : rows(other.rows), cols(other.cols), shipPosition(other.shipPosition) {
     std::cout << "Copy constructor" << std::endl;
     matrix = new int*[rows];
     for (int i = 0; i < rows; ++i) {
@@ -22,7 +22,7 @@ ShipMatrix::ShipMatrix(ShipMatrix& other) : rows(other.rows), cols(other.cols), 
 }
 
 // Конструктор перемещения
-ShipMatrix::ShipMatrix(ShipMatrix&& other): rows(other.rows), cols(other.cols), shipPosition(other.shipPosition), matrix(other.matrix) {
+ShipMatrix::ShipMatrix(ShipMatrix&& other) noexcept: rows(other.rows), cols(other.cols), shipPosition(other.shipPosition), matrix(other.matrix) {
     std::cout << "Move constructor" << std::endl;
     other.matrix = nullptr;  // Обнуляем указатель у перемещённого объекта
     other.rows = 0;
@@ -30,7 +30,7 @@ ShipMatrix::ShipMatrix(ShipMatrix&& other): rows(other.rows), cols(other.cols), 
 }
 
 // Оператор присваивания (копирование)
-ShipMatrix& ShipMatrix::operator=(ShipMatrix& other) {
+ShipMatrix& ShipMatrix::operator=(const ShipMatrix& other) {
     std::cout << "Copy assignment operator" << std::endl;
 
     // Освобождаем старую память
@@ -56,7 +56,7 @@ ShipMatrix& ShipMatrix::operator=(ShipMatrix& other) {
 }
 
 // Оператор присваивания (перемещение)
-ShipMatrix& ShipMatrix::operator=(ShipMatrix&& other) {
+ShipMatrix& ShipMatrix::operator=(ShipMatrix&& other) noexcept {
     std::cout << "Move assignment operator" << std::endl;
     if (this == &other) {
         return *this;  // Защита от самоприсваивания

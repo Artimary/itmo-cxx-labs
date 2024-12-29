@@ -14,16 +14,16 @@ public:
     ShipMatrix(int rows, int cols);
 
     // Конструктор копирования
-    ShipMatrix(ShipMatrix& other);
+    ShipMatrix(const ShipMatrix& other);
 
     // Конструктор перемещения
-    ShipMatrix(ShipMatrix&& other);
+    ShipMatrix(ShipMatrix&& other) noexcept;
 
     // Оператор присваивания (копирование)
-    ShipMatrix& operator=(ShipMatrix& other);
+    ShipMatrix& operator=(const ShipMatrix& other);
 
     // Оператор присваивания (перемещение)
-    ShipMatrix& operator=(ShipMatrix&& other);
+    ShipMatrix& operator=(ShipMatrix&& other) noexcept;
 
     // Деструктор
     ~ShipMatrix();
